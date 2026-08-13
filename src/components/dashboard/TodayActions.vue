@@ -1,37 +1,28 @@
 <script setup lang="ts">
-const todayActions = [
-    {
-        time: "10:00",
-        title: "Call Greenfield Landscaping",
-        description: "Qualified prospect",
-    },
-    {
-        time: "14:00",
-        title: "Follow up — ABC Roofing",
-        description: "Proposal sent",
-    },
-    {
-        time: "16:00",
-        title: "Send portfolio — XYZ Kitchens",
-        description: "Follow-up",
-    },
-];
+import type { Task } from "../../data/taskData";
+const props = defineProps<{
+  tasks: Task[];
+}>()
+
 </script>
 
 <template>
+    <div class="section-header">
+        <h1>Today's Actions</h1>
+    </div>
     <div class="action-list">
         <div
-            v-for="action in todayActions"
-            :key="action.time"
+            v-for="task in props.tasks"
+            :key="task.id"
             class="action-item"
         >
             <span class="action-time">
-                {{ action.time }}
+                {{ task.dueTime }}
             </span>
 
             <div class="action-content">
-                <h3>{{ action.title }}</h3>
-                <p>{{ action.description }}</p>
+                <h3>{{ task.title }}</h3>
+                <p>{{ task.description }}</p>
             </div>
         </div>
     </div>

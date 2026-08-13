@@ -1,4 +1,20 @@
-export const prospects = [
+export interface Prospect {
+    id: number;
+    business: string;
+    industry: string;
+    location: string;
+    website: string;
+    phone: string;
+    email: string;
+    contactPerson: string;
+    source: string;
+    status: string;
+    opportunityScore: number;
+    problems: string[];
+    notes: string;
+    archived: boolean;
+}
+export const prospects: Prospect[] = [
   {
     id: 1,
     business: "Greenfield Landscaping",
@@ -15,7 +31,8 @@ export const prospects = [
       "Weak project showcase",
       "Poor enquiry CTA"
     ],
-    notes: "Strong local reputation. Website does not showcase recent garden projects effectively."
+    notes: "Strong local reputation. Website does not showcase recent garden projects effectively.",
+    archived: false,
   },
   {
     id: 2,
@@ -33,7 +50,8 @@ export const prospects = [
       "Outdated design",
       "Weak trust signals"
     ],
-    notes: "Good reviews but the website feels dated and does not make the reviews prominent."
+    notes: "Good reviews but the website feels dated and does not make the reviews prominent.",
+    archived: false,
   },
   {
     id: 3,
@@ -52,7 +70,8 @@ export const prospects = [
       "Weak project showcase",
       "Difficult enquiry process"
     ],
-    notes: "High-quality work with strong photography. Website does not match the quality of the business."
+    notes: "High-quality work with strong photography. Website does not match the quality of the business.",
+    archived: false,
   },
   {
     id: 4,
@@ -70,7 +89,8 @@ export const prospects = [
       "Weak CTA",
       "Poor service explanation"
     ],
-    notes: "Services are listed but there is no clear path for a visitor to request a quote."
+    notes: "Services are listed but there is no clear path for a visitor to request a quote.",
+    archived: false,
   },
   {
     id: 5,
@@ -88,7 +108,8 @@ export const prospects = [
       "Doesn't reflect business quality",
       "Weak trust signals"
     ],
-    notes: "Premium products and strong photography. Potential high-value website project."
+    notes: "Premium products and strong photography. Potential high-value website project.",
+    archived: false,
   },
   {
     id: 6,
@@ -106,6 +127,7 @@ export const prospects = [
       "No website",
       "Difficult enquiry process"
     ],
-    notes: "Established local builder with strong word-of-mouth reputation but no website presence."
+    notes: "Established local builder with strong word-of-mouth reputation but no website presence.",
+    archived: false,
   }
 ];

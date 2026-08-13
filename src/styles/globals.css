@@ -94,13 +94,33 @@ select {
 }
 
 button {
-  border: 0;
-  border-radius: var(--radius-sm);
-  padding: 0.7rem 1rem;
+    border: 0;
+    border-radius: var(--radius-sm);
+    padding: 0.7rem 1rem;
+    font-weight: 600;
+    cursor: pointer;
+     background: var(--accent);
+    color: #09090b;
+}
+.btn-primary {
   background: var(--accent);
-  color: #09090b;
-  font-weight: 600;
-  cursor: pointer;
+    color: #09090b;
+}
+.btn-secondary {
+    background: var(--surface-raised);
+    border: 1px solid var(--border);
+    color: var(--text);
+}
+
+.btn-danger {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+}
+
+.btn-danger:hover {
+    background: var(--surface-raised);
+    color: var(--text);
 }
 
 input,

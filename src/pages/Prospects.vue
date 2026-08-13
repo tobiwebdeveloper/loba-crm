@@ -1,21 +1,53 @@
 <script setup lang="ts">
 import { prospects } from "../data/prospectData"
 import ProspectCard from "../components/prospects/ProspectCard.vue"
-import { computed, ref } from "vue";
+import ProspectForm from "../components/prospects/ProspectForm.vue"
+import type { Prospect } from "../data/prospectData"
+import { computed, ref } from "vue"
+
 const searchQuery = ref("");
 const selectedStatus = ref("");
+const isProspectFormOpen = ref(false);
+const showArchived = ref(false);
+
+const selectedProspect = ref<Prospect | null>(null)
+
+const addProspect = (prospect: Omit<Prospect, "id">) => {
+    prospects.push({
+        id: Date.now(),
+        ...prospect,
+    })
+
+    isProspectFormOpen.value = false
+}
+
+const editProspect = (prospect: Prospect) => {
+    console.log("EDIT CLICKED:", prospect)
+
+    selectedProspect.value = prospect
+    console.log("SELECTED:", selectedProspect.value)
+
+    isProspectFormOpen.value = true
+}
+const archiveProspect = (prospect: Prospect) => {
+   prospect.archived = true;
+   };
 
 const filteredProspects = computed(() => {
-  return prospects.filter((prospect) => {
-    const matchesSearch =
-    prospect.business
-    .toLowerCase().includes(searchQuery.value.toLowerCase());
-    const matchesStatus = !selectedStatus.value || 
-    prospect.status === selectedStatus.value;
+    return prospects.filter((prospect) => {
+        const matchesArchived = 
+       showArchived.value ? prospect.archived : !prospect.archived
+        const matchesSearch =
+            prospect.business
+                .toLowerCase()
+                .includes(searchQuery.value.toLowerCase())
 
-    return matchesSearch && matchesStatus;
+        const matchesStatus =
+            !selectedStatus.value ||
+            prospect.status === selectedStatus.value
 
-  })
+        return matchesArchived && matchesSearch && matchesStatus
+    })
 })
 </script>
 
@@ -39,8 +71,22 @@ const filteredProspects = computed(() => {
                         <option value="Proposal">Proposal</option>
                         <option value="Won">Won</option>
                     </select>
+                    <button
+    type="button"
+    class="btn-secondary"
+    @click="showArchived = !showArchived"
+>
+    {{ showArchived ? "View Active" : "View Archived" }}
+</button>
                 </div>
-                <button>Add Prospect</button>
+                <button
+    @click="
+        selectedProspect = null;
+        isProspectFormOpen = true;
+    "
+>
+    Add Prospect
+</button>
             </section>
            <div class="prospect-list">
                 <ul>
@@ -48,10 +94,16 @@ const filteredProspects = computed(() => {
                         v-for="prospect in filteredProspects"
                         :key="prospect.id"
                     >
-                        <ProspectCard :prospect="prospect" />
+                        <ProspectCard :prospect="prospect" @edit="editProspect" @archive="archiveProspect" />
                     </li>
                 </ul>
             </div>
+           <ProspectForm
+    v-if="isProspectFormOpen"
+    :prospect="selectedProspect"
+    @close="isProspectFormOpen = false"
+    @save="addProspect"
+/>
         </div>
     </main>
 </template>

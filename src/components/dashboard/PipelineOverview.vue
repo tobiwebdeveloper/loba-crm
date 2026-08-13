@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import { prospects } from "vue";
+import { prospects } from "../../data/prospectData";
+
 const stages = [
     "New",
     "Contacted",
@@ -20,7 +21,18 @@ const pipelineStages = computed(() => {
         };
     });
 
-    return counts;
+    const maxCount = Math.max(
+        ...counts.map((stage) => stage.count)
+    );
+
+    return counts.map((stage) => {
+        return {
+            ...stage,
+            width: maxCount
+                ? `${(stage.count / maxCount) * 100}%`
+                : "0%"
+        };
+    });
 });
 </script>
 <template>
@@ -31,71 +43,15 @@ const pipelineStages = computed(() => {
         </div>
 
         <div class="pipeline">
-            <div class="pipeline-stage">
-                <div class="stage-header">
-                    <span>New</span>
-                    <strong>8</strong>
-                </div>
-
-                <div class="stage-bar">
-                    <span style="width: 100%"></span>
-                </div>
+           <div v-for="stage in pipelineStages" :key="stage.name" class="pipeline-stage">
+            <div class="stage-header">
+                <span>{{ stage.name }}</span>
+                <strong>{{ stage.count }}</strong>
             </div>
-
-            <div class="pipeline-stage">
-                <div class="stage-header">
-                    <span>Contacted</span>
-                    <strong>6</strong>
-                </div>
-
-                <div class="stage-bar">
-                    <span style="width: 75%"></span>
-                </div>
+            <div class="stage-bar">
+                <span :style="{ width: stage.width}"></span>
             </div>
-
-            <div class="pipeline-stage">
-                <div class="stage-header">
-                    <span>Qualified</span>
-                    <strong>4</strong>
-                </div>
-
-                <div class="stage-bar">
-                    <span style="width: 50%"></span>
-                </div>
-            </div>
-
-            <div class="pipeline-stage">
-                <div class="stage-header">
-                    <span>Meeting</span>
-                    <strong>3</strong>
-                </div>
-
-                <div class="stage-bar">
-                    <span style="width: 38%"></span>
-                </div>
-            </div>
-
-            <div class="pipeline-stage">
-                <div class="stage-header">
-                    <span>Proposal</span>
-                    <strong>1</strong>
-                </div>
-
-                <div class="stage-bar">
-                    <span style="width: 13%"></span>
-                </div>
-            </div>
-
-            <div class="pipeline-stage">
-                <div class="stage-header">
-                    <span>Won</span>
-                    <strong>2</strong>
-                </div>
-
-                <div class="stage-bar">
-                    <span style="width: 25%"></span>
-                </div>
-            </div>
+           </div>
         </div>
     </section>
 </template>
