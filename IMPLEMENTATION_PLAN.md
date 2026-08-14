@@ -13,24 +13,24 @@ This is a detailed sprint-by-sprint breakdown to get Loba CRM to MVP release in 
 
 **Tasks:**
 ```
-[ ] Task 1.1.1: Wire StatCard metrics to prospectData
+[Done ] Task 1.1.1: Wire StatCard metrics to prospectData
     - Import prospect data in Dashboard.vue
     - Calculate: total prospects, new (status: new), conversion rate
     - Time: 45 min
 
-[ ] Task 1.1.2: Complete TodayActions component
+[ Done ] Task 1.1.2: Complete TodayActions component
     - Show today's tasks/follow-ups
     - Show recent calls
     - Add empty state
     - Time: 1 hour
 
-[ ] Task 1.1.3: Populate PipelineOverview
+[ Done ] Task 1.1.3: Populate PipelineOverview
     - Calculate prospects by stage
     - Display stage breakdown
     - Add visual indicators
     - Time: 1 hour
 
-[ ] Task 1.1.4: Dashboard styling & responsiveness
+[ Done ] Task 1.1.4: Dashboard styling & responsiveness
     - Ensure cards stack on smaller screens
     - Test layout integrity
     - Time: 45 min
@@ -104,13 +104,13 @@ This is a detailed sprint-by-sprint breakdown to get Loba CRM to MVP release in 
 
 **Tasks:**
 ```
-[ ] Task 1.3.1: Create callData.ts
+[ Done ] Task 1.3.1: Create callData.ts
     - Define Call interface/type
     - Create mock call data (5-10 sample calls)
     - Link calls to prospects by ID
     - Time: 45 min
 
-[ ] Task 1.3.2: Build CallForm component
+[ Done ] Task 1.3.2: Build CallForm component
     - Fields: prospect, date, duration, outcome (Completed/No-Answer/Callback), notes
     - Add required field validation
     - Time: 1.5 hours

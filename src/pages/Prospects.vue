@@ -72,21 +72,20 @@ const filteredProspects = computed(() => {
                         <option value="Won">Won</option>
                     </select>
                     <button
-    type="button"
-    class="btn-secondary"
-    @click="showArchived = !showArchived"
->
-    {{ showArchived ? "View Active" : "View Archived" }}
-</button>
+                        type="button"
+                        class="btn-secondary"
+                        @click="showArchived = !showArchived"
+                    >
+                        {{ showArchived ? "View Active" : "View Archived" }}
+                    </button>
                 </div>
                 <button
-    @click="
-        selectedProspect = null;
-        isProspectFormOpen = true;
-    "
->
-    Add Prospect
-</button>
+                type = "button"
+                @click="
+                    selectedProspect = null;
+                    isProspectFormOpen = true;">
+                Add Prospect
+            </button>
             </section>
            <div class="prospect-list">
                 <ul>
