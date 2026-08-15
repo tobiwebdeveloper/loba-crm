@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
+import { calls } from "../../data/callData"
 import type { Prospect } from "../../data/prospectData";
 
 const props = defineProps<{
@@ -13,6 +14,17 @@ const emit = defineEmits<{
 
 const isMenuOpen = ref(false);
 const isExpanded = ref(false);
+
+const callCount = computed(() => {
+  return calls.filter(
+    (call) => call.prospectId === props.prospect.id
+  ).length
+})
+const prospectCalls = computed(() => {
+    return calls.filter(
+        call => call.prospectId === props.prospect.id
+    )
+})
 </script>
 
 <template>
@@ -27,6 +39,7 @@ const isExpanded = ref(false);
 
             <div class="prospect-meta">
                 <span>{{ prospect.status }}</span>
+                <span>{{ callCount }} calls</span>
                 <strong>{{ prospect.opportunityScore }}</strong>
             </div>
 
@@ -152,6 +165,26 @@ const isExpanded = ref(false);
                         {{ problem }}
                     </span>
                 </div>
+            </div>
+                  <div class="detail-calls">
+                    <span>Recent Calls</span>
+
+                <div
+                    v-if="prospectCalls.length"
+                    class="call-list"
+                >
+                    <div
+                        v-for="call in prospectCalls"
+                        :key="call.id"
+                        class="call-item"
+                    >
+                        <strong>{{ call.date }}</strong>
+                        <span>{{ call.duration }} min</span>
+                        <span>{{ call.outcome }}</span>
+                    </div>
+                </div>
+
+                <p v-else>No calls recorded.</p>
             </div>
         </div>
 
@@ -430,6 +463,7 @@ const isExpanded = ref(false);
 
     font-size: 0.7rem;
 }
+
 
 /* Mobile */
 

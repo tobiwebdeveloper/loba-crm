@@ -8,8 +8,8 @@ const props = defineProps<{
 
 const getProspectName = (prospectId: number) => {
     const prospect = prospects.find(
-        (prospect) => prospect.id === prospectId
-    )
+    (prospect) => prospect.id === prospectId
+)
 
     return prospect?.business ?? "Unknown prospect"
 }

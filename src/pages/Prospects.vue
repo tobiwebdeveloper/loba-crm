@@ -28,9 +28,11 @@ const editProspect = (prospect: Prospect) => {
     console.log("SELECTED:", selectedProspect.value)
 
     isProspectFormOpen.value = true
+
 }
 const archiveProspect = (prospect: Prospect) => {
    prospect.archived = true;
+
    };
 
 const filteredProspects = computed(() => {
@@ -48,6 +50,12 @@ const filteredProspects = computed(() => {
 
         return matchesArchived && matchesSearch && matchesStatus
     })
+})
+
+const sortedProspects = computed(() => {
+  return[...filteredProspects.value].sort((a,b) => {
+    return b.opportunityScore - a.opportunityScore
+  })
 })
 </script>
 
@@ -90,7 +98,7 @@ const filteredProspects = computed(() => {
            <div class="prospect-list">
                 <ul>
                     <li
-                        v-for="prospect in filteredProspects"
+                        v-for="prospect in sortedProspects"
                         :key="prospect.id"
                     >
                         <ProspectCard :prospect="prospect" @edit="editProspect" @archive="archiveProspect" />

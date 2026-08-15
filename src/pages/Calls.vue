@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import CallList from "../components/calls/CallList.vue"
 import CallForm from "../components/calls/CallForm.vue";
 import { calls } from "../data/callData";
 import type { Call } from "../data/callData"
 import { prospects } from "../data/prospectData"
 const searchQuery = ref("")
+const selectedOutcome = ref("")
 const isCallFormOpen = ref(false);
 const handleSave = (call: Call) => {
 calls.push(call)
@@ -13,11 +14,28 @@ isCallFormOpen.value = false
 }
 const getProspectName = (prospectId: number) => {
     const prospect = prospects.find(
-        (prospect) => prospect.id === prospectId
-    )
+    (prospect) => prospect.id === prospectId
+)
 
     return prospect?.business ?? "Unknown prospect"
 }
+const filteredCalls = computed(() => {
+    return calls.filter((call) => {
+        const matchesSearch = getProspectName(call.prospectId)
+            .toLowerCase()
+            .includes(searchQuery.value.toLowerCase());
+        const matchesOutcome = 
+        !selectedOutcome.value ||
+        call.outcome === selectedOutcome.value;
+        return matchesSearch && matchesOutcome
+    })
+})
+const sortedCalls = computed(() => {
+  return[...filteredCalls.value].sort((a, b) => {
+    return new Date(b.date).getTime() - new Date(a.date).getTime()
+  })
+})
+
 </script>
 
 <template>
@@ -31,29 +49,36 @@ const getProspectName = (prospectId: number) => {
             </header>
 
             <section class="toolbar">
-                <div class="toolbar-controls">
-                    <input
-                        type="text"
-                        v-model="searchQuery"
-                        placeholder="Search calls..."
-                    />
-                </div>
+            <div class="toolbar-controls">
+                <input
+                    type="text"
+                    v-model="searchQuery"
+                    placeholder="Search calls..."
+                />
 
-                <button
-                    type="button"
-                    class="btn-primary"
-                    @click="isCallFormOpen = true"
-                >
-                    Log Call
-                </button>
-            </section>
+                <select v-model="selectedOutcome">
+                    <option value="">All outcomes</option>
+                    <option value="Completed">Completed</option>
+                    <option value="No-Answer">No-Answer</option>
+                    <option value="Callback">Callback</option>
+                </select>
+            </div>
+
+            <button
+                type="button"
+                class="btn-primary"
+                @click="isCallFormOpen = true"
+            >
+                Log Call
+            </button>
+</section>
             <CallForm
     v-if="isCallFormOpen"
     @close="isCallFormOpen = false"
     @save="handleSave"
 />
 
-           <CallList :calls="calls"/>
+           <CallList :calls="sortedCalls"/>
 
         </div>
     </main>

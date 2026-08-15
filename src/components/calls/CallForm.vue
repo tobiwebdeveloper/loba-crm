@@ -140,40 +140,7 @@ const emit = defineEmits<{
 </template>
 
 <style scoped>
-.modal-backdrop {
-    position: fixed;
-    inset: 0;
 
-    z-index: 9999;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: rgba(0, 0, 0, 0.7);
-}
-.modal {
-    position: relative;
-
-    width: 100%;
-    max-width: 42rem;
-
-    margin: auto;
-
-    z-index: 10000;
-}
-.call-form {
-    width: 100%;
-
-    padding: var(--space-6);
-
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-
-    box-shadow:
-        rgba(0, 0, 0, 0.4) 0 20px 60px;
-}
 
 /* Header */
 

@@ -192,45 +192,7 @@ const saveProspect = () => {
 </template>
 
 <style scoped>
-/* Backdrop */
 
-.modal-backdrop {
-    position: fixed;
-    inset: 0;
-    z-index: 100;
-
-    display: grid;
-    place-items: center;
-
-    padding: var(--space-5);
-
-    background: rgba(0, 0, 0, 0.68);
-    backdrop-filter: blur(6px);
-}
-
-/* Modal */
-
-.modal {
-    position: relative;
-
-    width: min(100%, 38rem);
-    max-height: min(90vh, 52rem);
-
-    display: flex;
-    flex-direction: column;
-
-    padding: var(--space-6);
-
-    overflow-y: auto;
-
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-
-    box-shadow:
-        0 24px 80px rgba(0, 0, 0, 0.45),
-        rgba(255, 255, 255, 0.08) 4px 4px;
-}
 
 /* Close */
 

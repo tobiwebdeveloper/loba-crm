@@ -6,7 +6,11 @@ import PipelineOverview from "../components/dashboard/PipelineOverview.vue";
 import { computed } from "vue";
 import { prospects }  from "../data/prospectData.ts"
 import { tasks } from "../data/taskData.ts"
+import { calls } from "../data/callData.ts";
 
+const totalCalls = computed(() => {
+  return calls.length;
+});
 const todayTasks = computed(() => {
   const today = new Date().toISOString().split("T")[0] ?? "";
   return tasks.filter((task) => task.dueDate === today)
@@ -39,7 +43,7 @@ const meetingProspects = computed(() => {
     <section class="overview">
       <StatCard label="Total prospects" :value="String(totalProspects)" />
       <StatCard label="New prospects" :value="String(newProspects)" />
-      <StatCard label="Calls made" value="12" />
+      <StatCard label="Calls made" :value="String(totalCalls)" />
       <StatCard label="Meetings booked" :value="String(meetingProspects)" />
       <StatCard label="Clients won" :value="String(wonProspects)" />
     </section>
