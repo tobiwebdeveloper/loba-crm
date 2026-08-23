@@ -1,0 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  min-width: 320px;
+  background-color: var(--background-primary);
+  color: white;
+}
+:root {
+  font-family: var(--font-family-body, system-ui, sans-serif);
+}
