@@ -15,8 +15,8 @@ importers:
         specifier: ^1.4.2
         version: 1.4.2
       '@paraxe/vue':
-        specifier: ^1.0.2
-        version: 1.0.2(magic-string@0.30.21)(rolldown@1.2.5)(typescript@6.0.3)(unplugin@3.3.0(esbuild@0.28.2)(rolldown@1.2.5)(vite@8.2.1(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.12)(yaml@2.9.0)))
+        specifier: ^1.0.5
+        version: 1.0.5(magic-string@0.30.21)(rolldown@1.2.5)(typescript@6.0.3)(unplugin@3.3.0(esbuild@0.28.2)(rolldown@1.2.5)(vite@8.2.1(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.12)(yaml@2.9.0)))
       dotenv:
         specifier: ^17.4.2
         version: 17.4.2
@@ -281,8 +281,8 @@ packages:
   '@paraxe/design@1.4.2':
     resolution: {integrity: sha512-MASFwdEXR0TYaCpG/fybh6JI5oYPWGSyDPBqERE0F/HG2O//IqmBDxHkr7pj6Iw8Yc3bg1TLzyi1qTqjm318MA==}
 
-  '@paraxe/vue@1.0.2':
-    resolution: {integrity: sha512-Uo9wUGFBVMmWyjDLtJSJmrOVkmYZXvkLsxLA2e7rdusSgF9YpIhyfE/40yS9a8m8FPnewKsm1RW95bfx582p6w==}
+  '@paraxe/vue@1.0.5':
+    resolution: {integrity: sha512-dztOYLRxV+UQs7VNE1t/VgJtEbZQ690fzx4JkQfa1P3Czauuj0/mEBt8OegpXfRuxRchkAEGlZfpWmLMHRgW/w==}
 
   '@rolldown/binding-android-arm-eabi@1.2.5':
     resolution: {integrity: sha512-DLe/i+l8ynIBY7XEQ191TeZvCoowIGa18R+dIV30GW7DiOtp74i/xX8hs8GUjW5ARV7VZuie3d6AumSmCwbeRA==}
@@ -1093,7 +1093,7 @@ snapshots:
 
   '@paraxe/design@1.4.2': {}
 
-  '@paraxe/vue@1.0.2(magic-string@0.30.21)(rolldown@1.2.5)(typescript@6.0.3)(unplugin@3.3.0(esbuild@0.28.2)(rolldown@1.2.5)(vite@8.2.1(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.12)(yaml@2.9.0)))':
+  '@paraxe/vue@1.0.5(magic-string@0.30.21)(rolldown@1.2.5)(typescript@6.0.3)(unplugin@3.3.0(esbuild@0.28.2)(rolldown@1.2.5)(vite@8.2.1(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.12)(yaml@2.9.0)))':
     dependencies:
       '@nuxt/kit': 4.5.2(magic-string@0.30.21)(rolldown@1.2.5)(unplugin@3.3.0(esbuild@0.28.2)(rolldown@1.2.5)(vite@8.2.1(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.12)(yaml@2.9.0)))
       '@paraxe/core': 1.0.0

@@ -8,6 +8,26 @@ export async function handleProspects(
 ): Promise<boolean> {
   const url = req.url ?? "";
 
+  // GET /api/prospects
+  if (req.method === "GET" && url === "/api/prospects") {
+    try {
+      const prospects = await sql`
+        SELECT *
+        FROM prospects
+        ORDER BY created_at DESC
+      `;
+
+      res.writeHead(200);
+      res.end(JSON.stringify(prospects));
+    } catch (error) {
+      console.error(error);
+      res.writeHead(500);
+      res.end(JSON.stringify({ error: "Failed to fetch prospects" }));
+    }
+
+    return true;
+  }
+
   // GET /api/prospects/:id
   if (req.method === "GET" && url.startsWith("/api/prospects/")) {
     const id = url.split("/")[3];
@@ -36,37 +56,22 @@ export async function handleProspects(
     return true;
   }
 
-  // GET /api/prospects
-  if (req.method === "GET" && url === "/api/prospects") {
-    try {
-      const prospects = await sql`
-        SELECT *
-        FROM prospects
-        ORDER BY created_at DESC
-      `;
-
-      res.writeHead(200);
-      res.end(JSON.stringify(prospects));
-    } catch (error) {
-      console.error(error);
-      res.writeHead(500);
-      res.end(JSON.stringify({ error: "Failed to fetch prospects" }));
-    }
-
-    return true;
-  }
-
   // POST /api/prospects
   if (req.method === "POST" && url === "/api/prospects") {
     let body = "";
 
-    req.on("data", (chunk) => {
-      body += chunk;
+    req.on("data", (chunk: Buffer) => {
+      body += chunk.toString();
     });
 
     req.on("end", async () => {
       try {
         const prospect = JSON.parse(body);
+
+        const value =
+          prospect.value === "" || prospect.value == null
+            ? 0
+            : Number(prospect.value);
 
         const newProspect = await sql`
           INSERT INTO prospects (
@@ -86,7 +91,7 @@ export async function handleProspects(
             ${prospect.phone},
             ${prospect.website},
             ${prospect.status},
-            ${Number(prospect.value)},
+            ${value},
             ${prospect.notes}
           )
           RETURNING *
@@ -109,13 +114,18 @@ export async function handleProspects(
     const id = url.split("/")[3];
     let body = "";
 
-    req.on("data", (chunk) => {
-      body += chunk;
+    req.on("data", (chunk: Buffer) => {
+      body += chunk.toString();
     });
 
     req.on("end", async () => {
       try {
         const prospect = JSON.parse(body);
+
+        const value =
+          prospect.value === "" || prospect.value == null
+            ? 0
+            : Number(prospect.value);
 
         const updatedProspect = await sql`
           UPDATE prospects
@@ -126,7 +136,7 @@ export async function handleProspects(
             phone = ${prospect.phone},
             website = ${prospect.website},
             status = ${prospect.status},
-            value = ${Number(prospect.value)},
+            value = ${value},
             notes = ${prospect.notes}
           WHERE id = ${id}
           RETURNING *
@@ -180,4 +190,3 @@ export async function handleProspects(
 
   return false;
 }
-

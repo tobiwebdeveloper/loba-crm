@@ -12,6 +12,94 @@ body {
   background-color: var(--background-primary);
   color: white;
 }
+/* CRM card */
+.card {
+  background:
+   
+    var(--surface-card);
+  border: 1px solid
+    color-mix(
+      in oklch,
+      var(--border-default) calc(100% * var(--contrast)),
+      transparent
+    );
+  border-radius: var(--radius-lg);
+  box-shadow:
+    var(--card-highlight),
+    var(--shadow-elevation-low);
+  transition:
+    background var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard),
+    box-shadow var(--duration-fast) var(--ease-standard),
+    transform var(--duration-fast) var(--ease-standard);
+}
+
+.card:hover {
+  background:
+    var(--card-gradient),
+    var(--surface-raised);
+  border-color: var(--border-strong);
+  box-shadow:
+    var(--card-highlight),
+    var(--shadow-elevation-medium);
+  transform: translateY(-1px);
+}
+
+
+/* CRM badge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  min-height: 1.5rem;
+  padding: 0.25rem 0.625rem;
+
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-full);
+
+  background: var(--surface-raised);
+  color: var(--text-secondary);
+
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1;
+  letter-spacing: 0.01em;
+
+  box-shadow: inset 0 1px 0
+    oklch(0.992 0.001 145.5 / 0.04);
+}
+
+
+/* CRM eyebrow */
+.eyebrow {
+  display: block;
+  margin: 0;
+
+  color: var(--text-muted);
+
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
 :root {
   font-family: var(--font-family-body, system-ui, sans-serif);
+}
+@media (max-width: 768px) {
+  .page-header {
+    gap: var(--space-4);
+  }
+
+  .detail-row {
+    gap: var(--space-1);
+  }
+
+  .activity-empty {
+    gap: var(--space-3);
+  }
+   .workspace-grid {
+    grid-template-columns: 1fr;
+  }
 }

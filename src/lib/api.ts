@@ -1,8 +1,9 @@
-// ============================================================
-import type { Prospect } from "@/types/crm";
-// ============================================================
 
-//
+import type {
+  Prospect,
+  Call,
+  FollowUp,
+} from "@/types/crm";
 
 // ============================================================
 // Prospects
@@ -29,7 +30,7 @@ export async function getProspect(id: number): Promise<Prospect> {
 }
 
 export async function createProspect(
-  prospect: Omit<Prospect, "id" | "created_at">,
+  prospect: Partial<Prospect>,
 ): Promise<Prospect> {
   const response = await fetch("/api/prospects", {
     method: "POST",
@@ -46,10 +47,9 @@ export async function createProspect(
   return response.json();
 }
 
-
 export async function updateProspect(
   id: number,
-  prospect: Omit<Prospect, "id" | "created_at">,
+  prospect: Partial<Prospect>,
 ): Promise<Prospect> {
   const response = await fetch(`/api/prospects/${id}`, {
     method: "PATCH",
@@ -66,9 +66,7 @@ export async function updateProspect(
   return response.json();
 }
 
-export async function deleteProspect(
-  id: number,
-): Promise<void> {
+export async function deleteProspect(id: number): Promise<void> {
   const response = await fetch(`/api/prospects/${id}`, {
     method: "DELETE",
   });
@@ -78,106 +76,145 @@ export async function deleteProspect(
   }
 }
 
-
-
 // ============================================================
 // Calls
 // ============================================================
 
-export async function getCalls() {
-    const response = await fetch("/api/calls")
-    const calls = await response.json()
+export async function getCalls(): Promise<Call[]> {
+  const response = await fetch("/api/calls");
 
-    return calls
+  if (!response.ok) {
+    throw new Error("Failed to load calls.");
+  }
+
+  return response.json();
 }
 
-export async function getCall(id) {
-    const response = await fetch(`/api/calls/${id}`)
-    const call = await response.json()
+export async function getCall(id: number): Promise<Call> {
+  const response = await fetch(`/api/calls/${id}`);
 
-    return call
+  if (!response.ok) {
+    throw new Error("Failed to load call.");
+  }
+
+  return response.json();
 }
 
-export async function createCall(call) {
-    const response = await fetch("/api/calls", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(call)
-    })
+export async function createCall(
+  call: Partial<Call>,
+): Promise<Call> {
+  const response = await fetch("/api/calls", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(call),
+  });
 
-    const createdCall = await response.json()
-    return createdCall
+  if (!response.ok) {
+    throw new Error("Failed to create call.");
+  }
+
+  return response.json();
 }
 
-export async function updateCall(id, call) {
-    const response = await fetch(`/api/calls/${id}`,{
-        method: "PATCH",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(call)
-    })
+export async function updateCall(
+  id: number,
+  call: Partial<Call>,
+): Promise<Call> {
+  const response = await fetch(`/api/calls/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(call),
+  });
 
-    const updatedCall = await response.json()
-    return updatedCall
+  if (!response.ok) {
+    throw new Error("Failed to update call.");
+  }
+
+  return response.json();
 }
 
-export async function deleteCall(id) {
-    await fetch(`/api/calls/${id}`,{
-        method: "DELETE"
-    })
-}
+export async function deleteCall(id: number): Promise<void> {
+  const response = await fetch(`/api/calls/${id}`, {
+    method: "DELETE",
+  });
 
+  if (!response.ok) {
+    throw new Error("Failed to delete call.");
+  }
+}
 
 // ============================================================
 // Follow-ups
 // ============================================================
 
-export async function getFollowUps() {
-    const response = await fetch("/api/follow-ups")
-    const followUps = await response.json()
+export async function getFollowUps(): Promise<FollowUp[]> {
+  const response = await fetch("/api/follow-ups");
 
-    return followUps
+  if (!response.ok) {
+    throw new Error("Failed to load follow-ups.");
+  }
+
+  return response.json();
 }
 
-export async function getFollowUp(id) {
-    const response = await fetch(`/api/follow-ups/${id}`)
-    const followUp = await response.json()
+export async function getFollowUp(id: number): Promise<FollowUp> {
+  const response = await fetch(`/api/follow-ups/${id}`);
 
-    return followUp
-    
+  if (!response.ok) {
+    throw new Error("Failed to load follow-up.");
+  }
+
+  return response.json();
 }
 
-export async function createFollowUp(followUp) {
-    const response = await fetch("/api/follow-ups", {
-          method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(followUp)
-    })
+export async function createFollowUp(
+  followUp: Partial<FollowUp>,
+): Promise<FollowUp> {
+  const response = await fetch("/api/follow-ups", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(followUp),
+  });
 
-    const createdFollowUp = await response.json()
-    return createdFollowUp
+  if (!response.ok) {
+    throw new Error("Failed to create follow-up.");
+  }
+
+  return response.json();
 }
 
-export async function updateFollowUp(id, followUp) {
-    const response = await fetch(`/api/follow-ups/${id}`,{
-        method: "PATCH",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(followUp)
+export async function updateFollowUp(
+  id: number,
+  followUp: Partial<FollowUp>,
+): Promise<FollowUp> {
+  const response = await fetch(`/api/follow-ups/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(followUp),
+  });
 
-    })
-    const updatedFollowUp = await response.json()
-    return updatedFollowUp
+  if (!response.ok) {
+    throw new Error("Failed to update follow-up.");
+  }
+
+  return response.json();
 }
 
-export async function deleteFollowUp(id) {
-    await fetch(`/api/follow-ups/${id}`,{
-        method: "DELETE"
-    })
+export async function deleteFollowUp(id: number): Promise<void> {
+  const response = await fetch(`/api/follow-ups/${id}`, {
+    method: "DELETE",
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to delete follow-up.");
+  }
 }
+
