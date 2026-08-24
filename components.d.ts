@@ -26,8 +26,6 @@ declare module 'vue' {
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     Input: typeof import('@paraxe/vue')['Input']
     Label: typeof import('@paraxe/vue')['Label']
-    List: typeof import('@paraxe/vue')['List']
-    ListItem: typeof import('@paraxe/vue')['ListItem']
     Pagination: typeof import('@paraxe/vue')['Pagination']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
@@ -42,9 +40,7 @@ declare module 'vue' {
     Table: typeof import('@paraxe/vue')['Table']
     Text: typeof import('@paraxe/vue')['Text']
     Textarea: typeof import('@paraxe/vue')['Textarea']
-    Title: typeof import('@paraxe/vue')['Title']
     Toast: typeof import('@paraxe/vue')['Toast']
-    Tooltip: typeof import('@paraxe/vue')['Tooltip']
   }
 }
 
@@ -64,8 +60,6 @@ declare global {
   const HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
   const Input: typeof import('@paraxe/vue')['Input']
   const Label: typeof import('@paraxe/vue')['Label']
-  const List: typeof import('@paraxe/vue')['List']
-  const ListItem: typeof import('@paraxe/vue')['ListItem']
   const Pagination: typeof import('@paraxe/vue')['Pagination']
   const RouterLink: typeof import('vue-router')['RouterLink']
   const RouterView: typeof import('vue-router')['RouterView']
@@ -80,7 +74,5 @@ declare global {
   const Table: typeof import('@paraxe/vue')['Table']
   const Text: typeof import('@paraxe/vue')['Text']
   const Textarea: typeof import('@paraxe/vue')['Textarea']
-  const Title: typeof import('@paraxe/vue')['Title']
   const Toast: typeof import('@paraxe/vue')['Toast']
-  const Tooltip: typeof import('@paraxe/vue')['Tooltip']
 }

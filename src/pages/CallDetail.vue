@@ -73,9 +73,7 @@ function openProspect(): void {
   );
 }
 
-function formatDate(value: string): string {
-  return new Date(value).toLocaleDateString();
-}
+
 
 function formatDateTime(value: string): string {
   return new Date(value).toLocaleString();

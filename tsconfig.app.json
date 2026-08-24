@@ -8,7 +8,6 @@
 
     "allowArbitraryExtensions": true,
 
-    "baseUrl": ".",
 
     "paths": {
       "@/*": ["./src/*"]
